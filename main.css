@@ -5,19 +5,19 @@
 }
 
 body {
-  background: url(new.avif);
-  background-position: center;
-  background-size: cover;
+  background: url(new.avif) no-repeat center center/cover;
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: sans-serif;
 }
 
 .container {
   margin-top: 10px;
   width: 35%;
+  min-width: 300px;
   height: auto;
   background: var(--background);
   backdrop-filter: blur(0.5rem);
@@ -27,13 +27,17 @@ body {
   justify-content: center;
   border-radius: 1rem;
   box-shadow: 0 1.8rem 3.7rem var(--box_shadow);
+  padding: 20px;
 }
+
 header {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 50px 15px 15px;
+  width: 100%;
 }
+
 header input {
   width: 100%;
   max-width: 280px;
@@ -61,25 +65,30 @@ main {
   align-items: center;
   text-align: center;
 }
+
 .location .city {
   color: #171111;
   font-size: 32px;
   font-weight: 500;
   margin-bottom: 5px;
 }
+
 .location .date {
   color: #171111;
   font-size: 16px;
 }
+
 .current .temp {
   color: #171111;
   font-size: 102px;
   font-weight: 900;
   margin: 30px 0px;
 }
+
 .current .temp span {
   font-weight: 500;
 }
+
 .current .weather {
   color: #171111;
   font-size: 32px;
@@ -87,39 +96,63 @@ main {
   font-style: italic;
   margin-bottom: 15px;
 }
+
 .current .hi-low {
   color: #171111;
   font-size: 24px;
   font-weight: 500;
 }
-@media (max-width: 768px) {
+
+@media (max-width: 480px) {
   .container {
-    width: 90%;
-    padding: 15px;
+    width: 95%;
+    padding: 20px 15px;
+    margin-top: 0;
+    min-height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+    justify-content: space-between;
   }
 
   header {
-    padding: 30px 10px 10px;
+    padding: 20px 0 10px;
+    width: 100%;
   }
 
   header input {
     font-size: 16px;
-    padding: 8px 12px;
+    padding: 10px 12px;
+    width: 100%;
+    border-radius: 12px;
+    border-bottom: 2px solid gray;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  main {
+    padding: 20px 10px;
+    flex: 1;
+    justify-content: center;
   }
 
   .location .city {
-    font-size: 24px;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .location .date {
+    font-size: 14px;
   }
 
   .current .temp {
-    font-size: 64px;
+    font-size: 60px;
+    margin: 20px 0;
   }
 
   .current .weather {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .current .hi-low {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
