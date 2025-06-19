@@ -34,7 +34,6 @@ header {
   align-items: center;
   padding: 50px 15px 15px;
 }
-
 header input {
   width: 100%;
   max-width: 280px;
@@ -44,7 +43,6 @@ header input {
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 0px 16px 0px 16px;
   border-bottom: 3px solid gray;
-
   color: #313131;
   font-size: 20px;
   font-weight: 300;
@@ -63,30 +61,25 @@ main {
   align-items: center;
   text-align: center;
 }
-
 .location .city {
   color: #171111;
   font-size: 32px;
   font-weight: 500;
   margin-bottom: 5px;
 }
-
 .location .date {
   color: #171111;
   font-size: 16px;
 }
-
 .current .temp {
   color: #171111;
   font-size: 102px;
   font-weight: 900;
   margin: 30px 0px;
 }
-
 .current .temp span {
   font-weight: 500;
 }
-
 .current .weather {
   color: #171111;
   font-size: 32px;
@@ -94,9 +87,39 @@ main {
   font-style: italic;
   margin-bottom: 15px;
 }
-
 .current .hi-low {
   color: #171111;
   font-size: 24px;
   font-weight: 500;
+}
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  header {
+    padding: 30px 10px 10px;
+  }
+
+  header input {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  .location .city {
+    font-size: 24px;
+  }
+
+  .current .temp {
+    font-size: 64px;
+  }
+
+  .current .weather {
+    font-size: 24px;
+  }
+
+  .current .hi-low {
+    font-size: 18px;
+  }
 }
