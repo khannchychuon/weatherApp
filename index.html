@@ -9,24 +9,38 @@
   <body>
     <div class="container">
       <header>
+        <h1 class="app-title">Weather App</h1>
         <input
           type="text"
-          autocomplete="off"
           class="search-box"
           placeholder="Search for a city..."
+          autocomplete="off"
         />
       </header>
+
       <main>
         <section class="location">
-          <div class="city"></div>
-          <div class="date"></div>
+          <div class="city">Your City</div>
+          <div class="date">Today's Date</div>
         </section>
+
         <div class="current">
-          <div class="temp"><span></span></div>
-          <div class="weather"></div>
-          <div class="hi-low"></div>
+          <img
+            class="weather-icon"
+            src=""
+            alt="Weather icon"
+            style="display: none"
+          />
+          <div class="temp"><span>--°C</span></div>
+          <div class="weather">Weather</div>
+          <div class="hi-low">Min / Max</div>
+          <div class="error-message"></div>
         </div>
       </main>
+
+      <footer>
+        <p>Powered by OpenWeatherMap</p>
+      </footer>
     </div>
     <script src="main.js"></script>
   </body>

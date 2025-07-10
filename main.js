@@ -1,50 +1,98 @@
 const api = {
   key: "fcc8de7015bbb202209bbf0261babf4c",
-  base: "https://api.openweathermap.org/data/2.5/"
-}
+  base: "https://api.openweathermap.org/data/2.5/",
+};
 
-const searchbox = document.querySelector('.search-box');
-searchbox.addEventListener('keypress', setQuery);
+const searchbox = document.querySelector(".search-box");
+searchbox.addEventListener("keypress", setQuery);
 
 function setQuery(evt) {
-  if (evt.keyCode == 13) {
-    getResults(searchbox.value);
+  if (evt.key === "Enter" || evt.keyCode === 13) {
+    getResults(searchbox.value.trim());
   }
 }
 
-function getResults (query) {
+function getResults(query) {
+  if (!query) {
+    showError("Please enter a city name.");
+    return;
+  }
+
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-    .then(weather => {
-      return weather.json();
-    }).then(displayResults);
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.cod === "404") {
+        showError("City not found. Please try another one.");
+      } else {
+        displayResults(data);
+        clearError();
+      }
+    })
+    .catch(() => showError("Network error. Please try again later."));
 }
 
-function displayResults (weather) {
-  let city = document.querySelector('.location .city');
-  city.innerText = `${weather.name}, ${weather.sys.country}`;
+function displayResults(weather) {
+  document.querySelector(
+    ".city"
+  ).innerText = `${weather.name}, ${weather.sys.country}`;
 
-  let now = new Date();
-  let date = document.querySelector('.location .date');
-  date.innerText = dateBuilder(now);
+  const now = new Date();
+  document.querySelector(".date").innerText = dateBuilder(now);
 
-  let temp = document.querySelector('.current .temp');
-  temp.innerHTML = `${Math.round(weather.main.temp)}<span>°c</span>`;
+  document.querySelector(".temp").innerHTML = `${Math.round(
+    weather.main.temp
+  )}<span>°C</span>`;
+  document.querySelector(".weather").innerText = weather.weather[0].main;
+  document.querySelector(".hi-low").innerText = `${Math.round(
+    weather.main.temp_min
+  )}°C / ${Math.round(weather.main.temp_max)}°C`;
 
-  let weather_el = document.querySelector('.current .weather');
-  weather_el.innerText = weather.weather[0].main;
-
-  let hilow = document.querySelector('.hi-low');
-  hilow.innerText = `${Math.round(weather.main.temp_min)}°c / ${Math.round(weather.main.temp_max)}°c`;
+  const iconCode = weather.weather[0].icon;
+  const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+  const iconImg = document.querySelector(".weather-icon");
+  iconImg.src = iconUrl;
+  iconImg.style.display = "block";
 }
 
-function dateBuilder (d) {
-  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+function showError(message) {
+  const errorBox = document.querySelector(".error-message");
+  errorBox.innerText = message;
+}
 
-  let day = days[d.getDay()];
-  let date = d.getDate();
-  let month = months[d.getMonth()];
-  let year = d.getFullYear();
+function clearError() {
+  const errorBox = document.querySelector(".error-message");
+  errorBox.innerText = "";
+}
+
+function dateBuilder(d) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const day = days[d.getDay()];
+  const date = d.getDate();
+  const month = months[d.getMonth()];
+  const year = d.getFullYear();
 
   return `${day} ${date} ${month} ${year}`;
 }
